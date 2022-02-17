@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Android.App;
-using Android.Bluetooth;
 using Android.Graphics;
 using Android.OS;
-using Android.Runtime;
-using Android.Util;
 using Android.Views;
 using Android.Widget;
 using AndroidX.AppCompat.App;
@@ -79,7 +76,7 @@ namespace FifaLotteryApp
             var comboBox = (Spinner)FindViewById(Resource.Id.divisionComboBox);
             comboBox.ItemSelected += OnDivisionItemSelected;
 
-            var items = DivisionTeamSelector.Instance.GetAllDivisions();
+            var items = DrawManager.Instance.GetAllDivisions();
             items.Insert(0, SelectDivisionString);
             comboBox.Adapter = CreateAdapterForComboBox(items);
             comboBox.SetSelection(0);
@@ -137,7 +134,6 @@ namespace FifaLotteryApp
             Button resetButton = FindViewById<Button>(Resource.Id.ResetButton);
             NewRound(resetButton);
             TogglePlayerDrawButtonsVisibility(false);
-            DivisionTeamSelector.Instance.ResetPlayerDraws();
 
             TextView teamList = FindViewById<TextView>(Resource.Id.teamList);
             teamList.Visibility = ViewStates.Invisible;
@@ -149,7 +145,7 @@ namespace FifaLotteryApp
             var comboBox = (Spinner)FindViewById(Resource.Id.divisionComboBox);
             comboBox.SetSelection(0);
 
-            DivisionTeamSelector.Instance.ResetAll();
+            DrawManager.Instance.ResetAll();
         }
 
         private void OnDivisionItemSelected(object sender, EventArgs e)
@@ -168,7 +164,7 @@ namespace FifaLotteryApp
 
         private void DrawDivision(object sender, EventArgs e)
         {
-            int divisionNum = DivisionTeamSelector.Instance.DrawDivision();
+            int divisionNum = DrawManager.Instance.DrawDivision();
             var comboBox = (Spinner)FindViewById(Resource.Id.divisionComboBox);
             comboBox.SetSelection(divisionNum);
         }
@@ -185,14 +181,14 @@ namespace FifaLotteryApp
                 divisionSelected.SetTypeface(null, TypefaceStyle.Bold);
 
                 // View Teams List for specific division
-                var teams = DivisionTeamSelector.Instance.GetTeamSelection(_division);
+                var teams = DrawManager.Instance.GetTeamSelection(_division);
                 teamList.Text = _currentTeamList = String.Join(Environment.NewLine, teams);
                 teamList.Visibility = ViewStates.Visible;
 
                 Button resetButton = FindViewById<Button>(Resource.Id.ResetButton);
                 NewRound(resetButton);
 
-                DivisionTeamSelector.Instance.ResetPlayerDraws();
+                DrawManager.Instance.ResetPlayerDraws();
             }
             else
             {
@@ -259,7 +255,7 @@ namespace FifaLotteryApp
                     break;
             }
 
-            var selectedTeam = DivisionTeamSelector.Instance.DrawTeam(_division, playerNum);
+            var selectedTeam = DrawManager.Instance.DrawTeam(_division, playerNum);
             if (selectedTeam != string.Empty)
             {
                 ChangePlayerTeamProperties($"Player {playerNum} - {selectedTeam}", true, playerTeamResourceId, color);
@@ -276,7 +272,7 @@ namespace FifaLotteryApp
                 resetButton.Visibility = ViewStates.Visible;
                 Button gamesDrawButton = FindViewById<Button>(Resource.Id.GamesDraw);
                 gamesDrawButton.Visibility = ViewStates.Visible;
-                if (DivisionTeamSelector.Instance.HasProtocolGame)
+                if (DrawManager.Instance.HasProtocolGame)
                 {
                     CheckBox protocolGameCheckBox = FindViewById<CheckBox>(Resource.Id.keepProtocolGameCheckbox);
                     protocolGameCheckBox.Visibility = ViewStates.Visible;
@@ -303,7 +299,7 @@ namespace FifaLotteryApp
             _numberOfPlayerDrawed = 0;
             TogglePlayerDrawButtonsVisibility(true);
             HidePlayerTeamsText();
-            DivisionTeamSelector.Instance.ResetTeamsDraw();
+            DrawManager.Instance.ResetTeamsDraw();
         }
 
         private void GamesDraw(object sender, EventArgs e)
@@ -313,7 +309,7 @@ namespace FifaLotteryApp
             CheckBox protocolGameCheckBox = FindViewById<CheckBox>(Resource.Id.keepProtocolGameCheckbox);
             protocolGameCheckBox.Visibility = ViewStates.Invisible;
 
-            string gamesDraw = DivisionTeamSelector.Instance.DrawGames(protocolGameCheckBox.Checked);
+            string gamesDraw = DrawManager.Instance.DrawGames(protocolGameCheckBox.Checked);
             TextView teamList = FindViewById<TextView>(Resource.Id.teamList);
             teamList.Text = gamesDraw;
 
