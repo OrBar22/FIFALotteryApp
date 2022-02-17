@@ -1,1 +1,3 @@
-msbuild /t:SignAndroidPackage /p:Configuration=Release FifaLotteryApp.csproj
+Open Developer Command prompt for VS - 
+- cd {projectLocation}
+- msbuild /t:SignAndroidPackage /p:Configuration=Release FifaLotteryApp.csproj

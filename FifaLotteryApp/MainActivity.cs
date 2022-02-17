@@ -9,6 +9,7 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using AndroidX.AppCompat.App;
+using FifaLotteryApp.Draw;
 using Environment = System.Environment;
 using String = System.String;
 
@@ -275,6 +276,11 @@ namespace FifaLotteryApp
                 resetButton.Visibility = ViewStates.Visible;
                 Button gamesDrawButton = FindViewById<Button>(Resource.Id.GamesDraw);
                 gamesDrawButton.Visibility = ViewStates.Visible;
+                if (DivisionTeamSelector.Instance.HasProtocolGame)
+                {
+                    CheckBox protocolGameCheckBox = FindViewById<CheckBox>(Resource.Id.keepProtocolGameCheckbox);
+                    protocolGameCheckBox.Visibility = ViewStates.Visible;
+                }
             }
         }
 
@@ -286,6 +292,9 @@ namespace FifaLotteryApp
 
         private void NewRound(Button resetButton)
         {
+            CheckBox protocolGameCheckBox = FindViewById<CheckBox>(Resource.Id.keepProtocolGameCheckbox);
+            protocolGameCheckBox.Visibility = ViewStates.Invisible;
+            protocolGameCheckBox.Checked = false;
             resetButton.Visibility = ViewStates.Invisible;
             Button gamesDrawButton = FindViewById<Button>(Resource.Id.GamesDraw);
             gamesDrawButton.Visibility = ViewStates.Invisible;
@@ -299,9 +308,15 @@ namespace FifaLotteryApp
 
         private void GamesDraw(object sender, EventArgs e)
         {
-            string gamesDraw = DivisionTeamSelector.Instance.DrawGames();
+            Button gamesDrawButton = (Button)sender;
+            gamesDrawButton.Visibility = ViewStates.Invisible;
+            CheckBox protocolGameCheckBox = FindViewById<CheckBox>(Resource.Id.keepProtocolGameCheckbox);
+            protocolGameCheckBox.Visibility = ViewStates.Invisible;
+
+            string gamesDraw = DivisionTeamSelector.Instance.DrawGames(protocolGameCheckBox.Checked);
             TextView teamList = FindViewById<TextView>(Resource.Id.teamList);
             teamList.Text = gamesDraw;
+
         }
 
         private void HidePlayerTeamsText()

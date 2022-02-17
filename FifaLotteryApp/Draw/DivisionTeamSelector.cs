@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Java.Lang;
-using Java.Util;
+using System.Text;
 using String = System.String;
 
-namespace FifaLotteryApp
+namespace FifaLotteryApp.Draw
 {
     public class DivisionTeamSelector
     {
@@ -21,6 +20,7 @@ namespace FifaLotteryApp
         private Dictionary<string, List<string>> _selectedTeamsByDivision;
         private Dictionary<int, List<string>> _selectedTeamsByPlayer;
         private static DivisionTeamSelector _instance = new DivisionTeamSelector();
+        private ProtocolGame _protocolGame;
 
         public static DivisionTeamSelector Instance
         {
@@ -150,6 +150,10 @@ namespace FifaLotteryApp
         {
             return _teamByDivision.Keys.ToList();
         }
+        public bool HasProtocolGame
+        {
+            get { return _protocolGame != null; }
+        }
 
         #region Draw
 
@@ -201,11 +205,16 @@ namespace FifaLotteryApp
         {
             InitializeSelectedTeamsPerPlayer();
         }
+        private void ResetProtocol()
+        {
+            _protocolGame = null;
+        }
 
         public void ResetAll()
         {
             ResetPlayerDraws();
             ResetTeamsDraw();
+            ResetProtocol();
         }
 
         #endregion
@@ -236,14 +245,14 @@ namespace FifaLotteryApp
         //}
 
         #region Draw Games
-        public string DrawGames()
+        public string DrawGames(bool keepProtocolGame)
         {
             bool[,] gamesPlayed = new bool[NumOfPlayers, NumOfPlayers];
             InitializeGamesPlayed(gamesPlayed);
 
             StringBuilder sb = new StringBuilder();
 
-            AppendRound(sb, gamesPlayed);
+            AppendRound(sb, gamesPlayed, keepProtocolGame && HasProtocolGame);
             AppendRound(sb, gamesPlayed);
             AppendRound(sb, gamesPlayed);
 
@@ -258,21 +267,32 @@ namespace FifaLotteryApp
             gamesPlayed[3, 3] = true;
         }
 
-        private void AppendRound(StringBuilder sb, bool[,] gamesPlayed)
+        private void AppendRound(StringBuilder sb, bool[,] gamesPlayed, bool keepProtocolGame = false)
         {
-            int numberOfRetries = 0;
-            System.Random r = new System.Random();
-            int firstRandomNumber = r.Next(1, 5);
-            int secondRandomNumber = r.Next(1, 5);
+            int firstRandomNumber, secondRandomNumber;
 
-            while (gamesPlayed[firstRandomNumber - 1, secondRandomNumber - 1] && numberOfRetries < MaxNumOfRetriesPerDraw)
+            if (!keepProtocolGame)
             {
+                int numberOfRetries = 0;
+                Random r = new Random();
+                firstRandomNumber = r.Next(1, 5);
                 secondRandomNumber = r.Next(1, 5);
-                numberOfRetries++;
-            }
 
-            if (numberOfRetries == MaxNumOfRetriesPerDraw)
-                sb.Append("Errorrrrrrr");
+                while (gamesPlayed[firstRandomNumber - 1, secondRandomNumber - 1] &&
+                       numberOfRetries < MaxNumOfRetriesPerDraw)
+                {
+                    secondRandomNumber = r.Next(1, 5);
+                    numberOfRetries++;
+                }
+
+                if (numberOfRetries == MaxNumOfRetriesPerDraw)
+                    sb.Append("Errorrrrrrr");
+            }
+            else
+            {
+                firstRandomNumber = _protocolGame.Player1;
+                secondRandomNumber = _protocolGame.Player2;
+            }
 
             gamesPlayed[firstRandomNumber - 1, secondRandomNumber - 1] =
                 gamesPlayed[secondRandomNumber - 1, firstRandomNumber - 1] = true;
@@ -305,6 +325,13 @@ namespace FifaLotteryApp
 
             gamesPlayed[firstPlayer - 1, secondPlayer - 1] =
                 gamesPlayed[secondPlayer - 1, firstPlayer - 1] = true;
+
+            _protocolGame = new ProtocolGame()
+            {
+                Player1 = firstPlayer,
+                Player2 = secondPlayer
+            };
+
             return $"{firstTeamPlayer} - {secondTeamPlayer} {Environment.NewLine}";
         }
 

@@ -182,4 +182,13 @@
     android:visibility="invisible"
     android:text="View Games Draw" />
 
+  <CheckBox android:id="@+id/keepProtocolGameCheckbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/GamesDraw"
+            android:layout_marginRight="5dip"
+            android:visibility="invisible"
+            android:text="Start With Protocol" />
+
 </RelativeLayout>
