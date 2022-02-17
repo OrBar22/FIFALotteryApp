@@ -63,8 +63,12 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Draw\DivisionTeamSelector.cs" />
-    <Compile Include="Draw\ProtocolGame.cs" />
+    <Compile Include="Draw\Model\Division.cs" />
+    <Compile Include="Draw\Selectors\DivisionSelector.cs" />
+    <Compile Include="Draw\DrawManager.cs" />
+    <Compile Include="Draw\Selectors\GamesSelector.cs" />
+    <Compile Include="Draw\Model\Game.cs" />
+    <Compile Include="Draw\Selectors\TeamSelector.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
