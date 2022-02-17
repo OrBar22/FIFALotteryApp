@@ -262,7 +262,10 @@ namespace FifaLotteryApp
                 ChangeHideButtonProperties(HideText, true, playerTeamHideButtonResourceId);
             }
             else
-                ChangePlayerTeamProperties($"Could not find team", true, playerTeamResourceId, Color.Black);
+            {
+                ResetAll(null, null);
+                return;
+            }
 
             button.Visibility = ViewStates.Invisible;
 

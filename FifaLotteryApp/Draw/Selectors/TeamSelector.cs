@@ -220,6 +220,11 @@ namespace FifaLotteryApp.Draw
             {
                 list.Clear();
             }
+
+            foreach (var list in _divisionsPlayedByPlayer.Values)
+            {
+                list.Clear();
+            }
         }
     }
 }
