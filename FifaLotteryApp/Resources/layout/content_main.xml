@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	app:layout_behavior="@string/appbar_scrolling_view_behavior"
+	tools:showIn="@layout/activity_main"
+    android:minWidth="25px"
+	android:minHeight="25px">
+
+  <TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text=""
+		android:id="@+id/textView1" />
+
+	<Button
+		android:id="@+id/resetAll"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:text="Reset All" />
+
+	<Button
+		android:id="@+id/fab"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignTop="@id/textView1"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="10dip"
+        android:text="Draw Division" />
+
+    <Spinner  
+        android:id="@+id/divisionComboBox"  
+        android:layout_width="wrap_content"  
+        android:layout_height="wrap_content"  
+        android:spinnerMode="dialog"
+        android:layout_below="@id/fab"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="10dip" />
+    
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+		android:layout_alignTop="@id/divisionComboBox"
+        android:layout_toLeftOf="@id/divisionComboBox"
+        android:visibility="invisible"
+        android:id="@+id/divisionView" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/divisionView"
+        android:text=""
+        android:layout_marginTop="5dip"
+        android:layout_alignLeft="@id/divisionView"
+        android:visibility="invisible"
+        android:layout_centerInParent="true"
+        android:id="@+id/teamList" />
+
+    <Button
+        android:id="@+id/player1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/teamList"
+        android:layout_marginTop="3dip"
+        android:visibility="invisible"
+        android:text="Draw Player 1" />
+
+  <Button
+        android:id="@+id/player2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/player1"
+        android:visibility="invisible"
+        android:text="Draw Player 2" />
+
+  <Button
+        android:id="@+id/player3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/player2"
+        android:visibility="invisible"
+        android:text="Draw Player 3" />
+
+  <Button
+        android:id="@+id/player4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/player3"
+        android:visibility="invisible"
+        android:text="Draw Player 4" />
+
+  <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignTop="@id/player1"
+    android:text=""
+    android:visibility="invisible"
+    android:id="@+id/player1Team" />
+
+  <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignTop="@id/player2"
+    android:text=""
+    android:visibility="invisible"
+    android:id="@+id/player2Team" />
+
+  <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignTop="@id/player3"
+    android:text=""
+    android:visibility="invisible"
+    android:id="@+id/player3Team" />
+
+  <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignTop="@id/player4"
+    android:text=""
+    android:visibility="invisible"
+    android:id="@+id/player4Team" />
+
+  <Button
+    android:id="@+id/player1TeamHide"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentRight="true"
+    android:layout_alignTop="@id/player1Team"
+    android:layout_marginLeft="5dip"
+    android:visibility="invisible"
+    android:text="Hide" />
+
+  <Button
+    android:id="@+id/player2TeamHide"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentRight="true"
+    android:layout_alignTop="@id/player2Team"
+    android:layout_marginLeft="5dip"
+    android:visibility="invisible"
+    android:text="Hide" />
+
+  <Button
+    android:id="@+id/player3TeamHide"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentRight="true"
+    android:layout_alignTop="@id/player3Team"
+    android:layout_marginLeft="5dip"
+    android:visibility="invisible"
+    android:text="Hide" />
+
+  <Button
+    android:id="@+id/player4TeamHide"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentRight="true"
+    android:layout_alignTop="@id/player4Team"
+    android:layout_marginLeft="5dip"
+    android:visibility="invisible"
+    android:text="Hide" />
+
+  <Button
+    android:id="@+id/ResetButton"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/player4"
+    android:visibility="invisible"
+    android:text="New Round" />
+
+  <Button
+    android:id="@+id/GamesDraw"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignTop="@id/ResetButton"
+    android:layout_alignParentRight="true"
+    android:visibility="invisible"
+    android:text="View Games Draw" />
+
+</RelativeLayout>
