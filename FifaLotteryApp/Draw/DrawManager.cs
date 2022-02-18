@@ -114,5 +114,13 @@ namespace FifaLotteryApp.Draw
         }
 
         #endregion
+
+        public bool IsLastRound(string division)
+        {
+            if (Division.TryParse(division, out Division divisionEnum))
+                return _teamSelector.IsLastRound(divisionEnum);
+            else
+                throw new Exception("Unexpected division");
+        }
     }
 }

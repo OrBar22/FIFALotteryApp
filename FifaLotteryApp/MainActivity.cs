@@ -20,6 +20,7 @@ namespace FifaLotteryApp
         private const int MaxPlayer = 4;
         private const string SelectDivisionString = "Select Division";
         private string _currentTeamList;
+        private bool _isLastRound = false;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -48,7 +49,7 @@ namespace FifaLotteryApp
             player4.Click += DrawTeam;
 
             Button resetButton = FindViewById<Button>(Resource.Id.ResetButton);
-            resetButton.Click += ResetTeamsDraw;
+            resetButton.Click += OnNewRoundSelected;
 
             Button resetAll = FindViewById<Button>(Resource.Id.resetAll);
             resetAll.Click += ResetAll;
@@ -156,6 +157,7 @@ namespace FifaLotteryApp
 
         private void ResetAll(object sender, EventArgs e)
         {
+            _isLastRound = false;
             Button resetButton = FindViewById<Button>(Resource.Id.ResetButton);
             NewRound(resetButton);
             TogglePlayerDrawButtonsVisibility(false);
@@ -297,7 +299,17 @@ namespace FifaLotteryApp
             if (_numberOfPlayerDrawed == MaxPlayer)
             {
                 Button resetButton = FindViewById<Button>(Resource.Id.ResetButton);
-                resetButton.Visibility = ViewStates.Visible;
+                if (!_isLastRound)
+                {
+                    if (DrawManager.Instance.IsLastRound(_division))
+                    {
+                        _isLastRound = true;
+                        resetButton.Text = "Last Round";
+                    }
+
+                    resetButton.Visibility = ViewStates.Visible;
+                }
+
                 Button gamesDrawButton = FindViewById<Button>(Resource.Id.GamesDraw);
                 gamesDrawButton.Visibility = ViewStates.Visible;
                 if (DrawManager.Instance.HasProtocolGame)
@@ -308,7 +320,7 @@ namespace FifaLotteryApp
             }
         }
 
-        private void ResetTeamsDraw(object sender, EventArgs e)
+        private void OnNewRoundSelected(object sender, EventArgs e)
         {
             Button button = (Button)sender;
             NewRound(button);
@@ -319,6 +331,7 @@ namespace FifaLotteryApp
             CheckBox protocolGameCheckBox = FindViewById<CheckBox>(Resource.Id.keepProtocolGameCheckbox);
             protocolGameCheckBox.Visibility = ViewStates.Invisible;
             protocolGameCheckBox.Checked = false;
+            resetButton.Text = "New Round";
             resetButton.Visibility = ViewStates.Invisible;
             Button gamesDrawButton = FindViewById<Button>(Resource.Id.GamesDraw);
             gamesDrawButton.Visibility = ViewStates.Invisible;
