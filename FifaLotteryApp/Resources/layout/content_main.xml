@@ -21,16 +21,20 @@
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
+        android:textAllCaps="false"
         android:text="Reset All" />
 
-	<Button
+  <Button
 		android:id="@+id/fab"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_alignTop="@id/textView1"
         android:layout_alignParentRight="true"
         android:layout_marginLeft="10dip"
+        android:textAllCaps="false"
         android:text="Draw Division" />
+
+    #### Division Details####  
 
     <Spinner  
         android:id="@+id/divisionComboBox"  
@@ -46,6 +50,7 @@
         android:layout_height="wrap_content"
 		android:layout_alignTop="@id/divisionComboBox"
         android:layout_toLeftOf="@id/divisionComboBox"
+        android:textStyle="bold"
         android:visibility="invisible"
         android:id="@+id/divisionView" />
 
@@ -60,44 +65,53 @@
         android:layout_centerInParent="true"
         android:id="@+id/teamList" />
 
+    #### Violate Buttons ####
+
     <Button
         android:id="@+id/player1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/teamList"
         android:layout_marginTop="3dip"
+        android:textAllCaps="false"
         android:visibility="invisible"
-        android:text="Draw Player 1" />
+        android:text="Player 1 - Violate" />
 
   <Button
         android:id="@+id/player2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/player1"
+        android:textAllCaps="false"
         android:visibility="invisible"
-        android:text="Draw Player 2" />
+        android:text="Player 2 - Violate" />
 
   <Button
         android:id="@+id/player3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/player2"
+        android:textAllCaps="false"
         android:visibility="invisible"
-        android:text="Draw Player 3" />
+        android:text="Player 3 - Violate" />
 
   <Button
         android:id="@+id/player4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/player3"
+        android:textAllCaps="false"
         android:visibility="invisible"
-        android:text="Draw Player 4" />
+        android:text="Player 4 - Violate" />
+  
+  #### Player Team Text ####
 
   <TextView
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_alignTop="@id/player1"
     android:text=""
+    android:textStyle="bold"
     android:visibility="invisible"
     android:id="@+id/player1Team" />
 
@@ -106,6 +120,7 @@
     android:layout_height="wrap_content"
     android:layout_alignTop="@id/player2"
     android:text=""
+    android:textStyle="bold"
     android:visibility="invisible"
     android:id="@+id/player2Team" />
 
@@ -114,6 +129,7 @@
     android:layout_height="wrap_content"
     android:layout_alignTop="@id/player3"
     android:text=""
+    android:textStyle="bold"
     android:visibility="invisible"
     android:id="@+id/player3Team" />
 
@@ -122,54 +138,117 @@
     android:layout_height="wrap_content"
     android:layout_alignTop="@id/player4"
     android:text=""
+    android:textStyle="bold"
     android:visibility="invisible"
     android:id="@+id/player4Team" />
 
-  <Button
+  #### Hide Buttons ####
+
+  <ToggleButton
     android:id="@+id/player1TeamHide"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_alignParentRight="true"
     android:layout_alignTop="@id/player1Team"
     android:layout_marginLeft="5dip"
+    android:textAllCaps="false"
     android:visibility="invisible"
-    android:text="Hide" />
+    android:textOn="Show" 
+    android:textOff="Hide" />
 
-  <Button
+  <ToggleButton
     android:id="@+id/player2TeamHide"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_alignParentRight="true"
     android:layout_alignTop="@id/player2Team"
     android:layout_marginLeft="5dip"
+    android:textAllCaps="false"
     android:visibility="invisible"
-    android:text="Hide" />
+    android:textOn="Show" 
+    android:textOff="Hide" />
 
-  <Button
+  <ToggleButton
     android:id="@+id/player3TeamHide"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_alignParentRight="true"
     android:layout_alignTop="@id/player3Team"
     android:layout_marginLeft="5dip"
+    android:textAllCaps="false"
     android:visibility="invisible"
-    android:text="Hide" />
+    android:textOn="Show" 
+    android:textOff="Hide" />
 
-  <Button
+  <ToggleButton
     android:id="@+id/player4TeamHide"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_alignParentRight="true"
     android:layout_alignTop="@id/player4Team"
     android:layout_marginLeft="5dip"
+    android:textAllCaps="false"
     android:visibility="invisible"
-    android:text="Hide" />
+    android:textOn="Show" 
+    android:textOff="Hide" />
+
+  #### Safa Buttons ####
+
+  <ToggleButton 
+    android:id="@+id/player1TeamSafa" 
+    android:layout_width="wrap_content" 
+    android:layout_height="wrap_content" 
+    android:textOn="Safa ON" 
+    android:textOff="Safa OFF" 
+    android:layout_alignParentLeft="true"
+    android:layout_alignTop="@id/player1Team"
+    android:layout_marginLeft="5dip"
+    android:visibility="invisible"
+    android:textAllCaps="false" />
+
+  <ToggleButton 
+    android:id="@+id/player2TeamSafa" 
+    android:layout_width="wrap_content" 
+    android:layout_height="wrap_content" 
+    android:textOn="Safa ON" 
+    android:textOff="Safa OFF" 
+    android:layout_alignParentLeft="true"
+    android:layout_alignTop="@id/player2Team"
+    android:layout_marginLeft="5dip"
+    android:visibility="invisible"
+    android:textAllCaps="false" />
+
+  <ToggleButton 
+    android:id="@+id/player3TeamSafa" 
+    android:layout_width="wrap_content" 
+    android:layout_height="wrap_content" 
+    android:textOn="Safa ON" 
+    android:textOff="Safa OFF" 
+    android:layout_alignParentLeft="true"
+    android:layout_alignTop="@id/player3Team"
+    android:layout_marginLeft="5dip"
+    android:visibility="invisible"
+    android:textAllCaps="false" />
+
+  <ToggleButton 
+    android:id="@+id/player4TeamSafa" 
+    android:layout_width="wrap_content" 
+    android:layout_height="wrap_content" 
+    android:textOn="Safa ON" 
+    android:textOff="Safa OFF" 
+    android:layout_alignParentLeft="true"
+    android:layout_alignTop="@id/player4Team"
+    android:layout_marginLeft="5dip"
+    android:visibility="invisible"
+    android:textAllCaps="false" />
+
 
   <Button
     android:id="@+id/ResetButton"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_below="@id/player4"
+    android:textAllCaps="false"
     android:visibility="invisible"
     android:text="New Round" />
 
@@ -179,16 +258,17 @@
     android:layout_height="wrap_content"
     android:layout_alignTop="@id/ResetButton"
     android:layout_alignParentRight="true"
+    android:textAllCaps="false"
     android:visibility="invisible"
     android:text="View Games Draw" />
 
   <CheckBox android:id="@+id/keepProtocolGameCheckbox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_below="@id/GamesDraw"
-            android:layout_marginRight="5dip"
-            android:visibility="invisible"
-            android:text="Start With Protocol" />
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentRight="true"
+    android:layout_below="@id/GamesDraw"
+    android:layout_marginRight="5dip"
+    android:visibility="invisible"
+    android:text="Start With Protocol" />
 
 </RelativeLayout>
