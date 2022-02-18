@@ -11,7 +11,7 @@ namespace FifaLotteryApp.Draw
         private Dictionary<Division, List<string>> _teamByDivision;
         private Dictionary<Division, List<string>> _selectedTeamsByDivision;
         private Dictionary<int, List<string>> _selectedTeamsByPlayer;
-        private Dictionary<int, List<Division>> _divisionsPlayedByPlayer; // relevant for Division.All mode
+        private Dictionary<int, List<Division>> _divisionsPlayedByPlayerInAllTeamsMode; // relevant for Division.All mode
 
         #region Initialization
 
@@ -25,16 +25,16 @@ namespace FifaLotteryApp.Draw
             _selectedTeamsByPlayer = new Dictionary<int, List<string>>();
             InitializeSelectedTeamsPerPlayer();
 
-            _divisionsPlayedByPlayer = new Dictionary<int, List<Division>>();
+            _divisionsPlayedByPlayerInAllTeamsMode = new Dictionary<int, List<Division>>();
             InitializeDivisionsPlayedByPlayer();
         }
 
         private void InitializeDivisionsPlayedByPlayer()
         {
-            _divisionsPlayedByPlayer[1] = new List<Division>();
-            _divisionsPlayedByPlayer[2] = new List<Division>();
-            _divisionsPlayedByPlayer[3] = new List<Division>();
-            _divisionsPlayedByPlayer[4] = new List<Division>();
+            _divisionsPlayedByPlayerInAllTeamsMode[1] = new List<Division>();
+            _divisionsPlayedByPlayerInAllTeamsMode[2] = new List<Division>();
+            _divisionsPlayedByPlayerInAllTeamsMode[3] = new List<Division>();
+            _divisionsPlayedByPlayerInAllTeamsMode[4] = new List<Division>();
         }
 
         private void InitializeSelectedTeamsPerPlayer()
@@ -166,9 +166,9 @@ namespace FifaLotteryApp.Draw
                 if (division == Division.All)
                 {
                     Division teamDivison = GetDivisionByTeam(selectedTeam);
-                    if (!_divisionsPlayedByPlayer[playerNum].Contains(teamDivison))
+                    if (!_divisionsPlayedByPlayerInAllTeamsMode[playerNum].Contains(teamDivison))
                     {
-                        _divisionsPlayedByPlayer[playerNum].Add(teamDivison);
+                        _divisionsPlayedByPlayerInAllTeamsMode[playerNum].Add(teamDivison);
                     }
                     else
                     {
@@ -221,10 +221,18 @@ namespace FifaLotteryApp.Draw
                 list.Clear();
             }
 
-            foreach (var list in _divisionsPlayedByPlayer.Values)
+            foreach (var list in _divisionsPlayedByPlayerInAllTeamsMode.Values)
             {
                 list.Clear();
             }
+        }
+
+        public bool IsLastRound(Division division)
+        {
+            var numberOfRounds = _selectedTeamsByPlayer[1].Count;
+            var numberOfRelevantTeamsInDivision = division != Division.All ? _teamByDivision[division].Count : Enum.GetNames(typeof(Division)).Length - 1;
+
+            return numberOfRelevantTeamsInDivision - numberOfRounds == 1;
         }
     }
 }
