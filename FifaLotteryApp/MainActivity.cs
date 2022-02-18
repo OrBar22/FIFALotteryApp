@@ -200,6 +200,7 @@ namespace FifaLotteryApp
         {
             TextView divisionSelected = FindViewById<TextView>(Resource.Id.divisionView);
             TextView teamList = FindViewById<TextView>(Resource.Id.teamList);
+            _isLastRound = false;
             divisionSelected.Visibility = ViewStates.Visible;
 
             if (_division != string.Empty)
