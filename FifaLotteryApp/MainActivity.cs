@@ -18,8 +18,6 @@ namespace FifaLotteryApp
         private string _division;
         private int _numberOfPlayerDrawed;
         private const int MaxPlayer = 4;
-        private const string HideText = "Hide";
-        private const string ShowText = "Show";
         private const string SelectDivisionString = "Select Division";
         private string _currentTeamList;
         protected override void OnCreate(Bundle savedInstanceState)
@@ -55,18 +53,18 @@ namespace FifaLotteryApp
             Button resetAll = FindViewById<Button>(Resource.Id.resetAll);
             resetAll.Click += ResetAll;
 
-            Button player1Hide = FindViewById<Button>(Resource.Id.player1TeamHide);
+            ToggleButton player1Hide = FindViewById<ToggleButton>(Resource.Id.player1TeamHide);
             player1Hide.Click += ToggleHideButton;
 
-            Button player2Hide = FindViewById<Button>(Resource.Id.player2TeamHide);
+            ToggleButton player2Hide = FindViewById<ToggleButton>(Resource.Id.player2TeamHide);
             player2Hide.Click += ToggleHideButton;
 
-            Button player3Hide = FindViewById<Button>(Resource.Id.player3TeamHide);
+            ToggleButton player3Hide = FindViewById<ToggleButton>(Resource.Id.player3TeamHide);
             player3Hide.Click += ToggleHideButton;
 
-            Button player4Hide = FindViewById<Button>(Resource.Id.player4TeamHide);
+            ToggleButton player4Hide = FindViewById<ToggleButton>(Resource.Id.player4TeamHide);
             player4Hide.Click += ToggleHideButton;
-            
+
             Button gamesDrawButton = FindViewById<Button>(Resource.Id.GamesDraw);
             gamesDrawButton.Click += GamesDraw;
         }
@@ -92,22 +90,49 @@ namespace FifaLotteryApp
 
         private void ToggleHideButton(object sender, EventArgs e)
         {
-            Button button = (Button)sender;
+            ToggleButton button = (ToggleButton)sender;
+            
             var resourceId = GetPlayerTextIDFromHideButton(button);
             TextView playerTeam = FindViewById<TextView>(resourceId);
-            if (button.Text == HideText)
+
+            resourceId = GetPlayerSafaIDFromHideButton(button);
+            Button playerSafa = FindViewById<Button>(resourceId);
+            
+            if (button.Checked)
             {
-                button.Text = ShowText;
                 playerTeam.Visibility = ViewStates.Invisible;
+                playerSafa.Visibility = ViewStates.Visible;
             }
             else
             {
-                button.Text = HideText;
                 playerTeam.Visibility = ViewStates.Visible;
+                playerSafa.Visibility = ViewStates.Invisible;
             }
         }
 
-        private int GetPlayerTextIDFromHideButton(Button button)
+        private int GetPlayerSafaIDFromHideButton(ToggleButton button)
+        {
+            int resourceId = 0;
+            switch (button.Id)
+            {
+                case Resource.Id.player1TeamHide:
+                    resourceId = Resource.Id.player1TeamSafa;
+                    break;
+                case Resource.Id.player2TeamHide:
+                    resourceId = Resource.Id.player2TeamSafa;
+                    break;
+                case Resource.Id.player3TeamHide:
+                    resourceId = Resource.Id.player3TeamSafa;
+                    break;
+                case Resource.Id.player4TeamHide:
+                    resourceId = Resource.Id.player4TeamSafa;
+                    break;
+            }
+
+            return resourceId;
+        }
+
+        private int GetPlayerTextIDFromHideButton(ToggleButton button)
         {
             int resourceId = 0;
             switch (button.Id)
@@ -259,7 +284,7 @@ namespace FifaLotteryApp
             if (selectedTeam != string.Empty)
             {
                 ChangePlayerTeamProperties($"Player {playerNum} - {selectedTeam}", true, playerTeamResourceId, color);
-                ChangeHideButtonProperties(HideText, true, playerTeamHideButtonResourceId);
+                ChangeHideButtonProperties(true, playerTeamHideButtonResourceId);
             }
             else
             {
@@ -324,10 +349,16 @@ namespace FifaLotteryApp
             ChangePlayerTeamProperties(string.Empty, false, Resource.Id.player2Team, Color.Black);
             ChangePlayerTeamProperties(string.Empty, false, Resource.Id.player3Team, Color.Black);
             ChangePlayerTeamProperties(string.Empty, false, Resource.Id.player4Team, Color.Black);
-            ChangeHideButtonProperties(HideText, false, Resource.Id.player1TeamHide);
-            ChangeHideButtonProperties(HideText, false, Resource.Id.player2TeamHide);
-            ChangeHideButtonProperties(HideText, false, Resource.Id.player3TeamHide);
-            ChangeHideButtonProperties(HideText, false, Resource.Id.player4TeamHide);
+
+            ChangeHideButtonProperties(false, Resource.Id.player1TeamHide);
+            ChangeHideButtonProperties(false, Resource.Id.player2TeamHide);
+            ChangeHideButtonProperties(false, Resource.Id.player3TeamHide);
+            ChangeHideButtonProperties(false, Resource.Id.player4TeamHide);
+
+            ChangeHideButtonProperties(false, Resource.Id.player1TeamSafa);
+            ChangeHideButtonProperties(false, Resource.Id.player2TeamSafa);
+            ChangeHideButtonProperties(false, Resource.Id.player3TeamSafa);
+            ChangeHideButtonProperties(false, Resource.Id.player4TeamSafa);
         }
 
         private void ChangePlayerTeamProperties(string text, bool visible, int resourceId, Color color)
@@ -338,11 +369,11 @@ namespace FifaLotteryApp
             playerTeam.SetTextColor(color);
         }
 
-        private void ChangeHideButtonProperties(string text, bool visible, int resourceId)
+        private void ChangeHideButtonProperties(bool visible, int resourceId)
         {
-            Button hideButton = FindViewById<Button>(resourceId);
-            hideButton.Text = text;
+            ToggleButton hideButton = FindViewById<ToggleButton>(resourceId);
             hideButton.Visibility = visible ? ViewStates.Visible : ViewStates.Invisible;
+            hideButton.Checked = false;
         }
     }
 }
