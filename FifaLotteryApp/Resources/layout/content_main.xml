@@ -69,40 +69,40 @@
 
     <Button
         android:id="@+id/player1"
-        android:layout_width="wrap_content"
+        android:layout_width="165dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/teamList"
         android:layout_marginTop="3dip"
         android:textAllCaps="false"
         android:visibility="invisible"
-        android:text="Player 1 - Violate" />
+        android:text="Or - Violate" />
 
   <Button
         android:id="@+id/player2"
-        android:layout_width="wrap_content"
+        android:layout_width="165dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/player1"
         android:textAllCaps="false"
         android:visibility="invisible"
-        android:text="Player 2 - Violate" />
+        android:text="Roman - Violate" />
 
-  <Button
+    <Button
         android:id="@+id/player3"
-        android:layout_width="wrap_content"
+        android:layout_width="165dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/player2"
         android:textAllCaps="false"
         android:visibility="invisible"
-        android:text="Player 3 - Violate" />
+        android:text="Yevgeni - Violate" />
 
   <Button
         android:id="@+id/player4"
-        android:layout_width="wrap_content"
+        android:layout_width="165dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/player3"
         android:textAllCaps="false"
         android:visibility="invisible"
-        android:text="Player 4 - Violate" />
+        android:text="FULG - Violate" />
   
   #### Player Team Text ####
 
