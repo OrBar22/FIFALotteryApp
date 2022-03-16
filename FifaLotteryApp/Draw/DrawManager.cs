@@ -84,7 +84,7 @@ namespace FifaLotteryApp.Draw
 
         private string GetStringPerGame(Game game)
         {
-            return $"{_teamSelector.GetLastPlayerTeam(game.Player1)}  (Player {game.Player1}) - {_teamSelector.GetLastPlayerTeam(game.Player2)}  (Player {game.Player2})";
+            return $"{_teamSelector.GetLastPlayerTeam(game.Player1)}  ({GetPlayerNameByNumber(game.Player1)}) - {_teamSelector.GetLastPlayerTeam(game.Player2)}  ({GetPlayerNameByNumber(game.Player2)})";
         }
 
         #endregion
@@ -121,6 +121,27 @@ namespace FifaLotteryApp.Draw
                 return _teamSelector.IsLastRound(divisionEnum);
             else
                 throw new Exception("Unexpected division");
+        }
+
+        public static string GetPlayerNameByNumber(int playerNum)
+        {
+            string playerName = null;
+            switch (playerNum)
+            {
+                case 1: playerName = "Or";
+                    break;
+                case 2:
+                    playerName = "Roman";
+                    break;
+                case 3:
+                    playerName = "Yevgeni";
+                    break;
+                case 4:
+                    playerName = "FULG";
+                    break;
+            }
+
+            return playerName;
         }
     }
 }

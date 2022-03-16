@@ -286,7 +286,7 @@ namespace FifaLotteryApp
             var selectedTeam = DrawManager.Instance.DrawTeam(_division, playerNum);
             if (selectedTeam != string.Empty)
             {
-                ChangePlayerTeamProperties($"Player {playerNum} - {selectedTeam}", true, playerTeamResourceId, color);
+                ChangePlayerTeamProperties($"{DrawManager.GetPlayerNameByNumber(playerNum)} - {selectedTeam}", true, playerTeamResourceId, color);
                 ChangeHideButtonProperties(true, playerTeamHideButtonResourceId);
             }
             else
